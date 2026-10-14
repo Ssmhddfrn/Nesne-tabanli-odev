@@ -1,82 +1,82 @@
-﻿using System;
+using System;
 
-namespace TekCiftUygulamasi
+namespace OddEvenApp
 {
-    // Kullanıcının girdisinin ne türde olduğunu belirtir
-    enum GirdiTuru
+    // Specifies the type of the user's input
+    enum InputType
     {
-        Cikis,
-        Sayi,
-        Gecersiz
+        Exit,
+        Number,
+        Invalid
     }
 
-    // Girdiyi okuyup türünü belirleyen sınıf
-    class GirdiOkuyucu
+    // Class that reads the input and determines its type
+    class InputReader
     {
-        public GirdiTuru Oku(out long sayi)
+        public InputType Read(out long number)
         {
-            sayi = 0;
+            number = 0;
 
-            Console.Write("Bir sayı girin, çıkmak için n/N: ");
-            string girdi = (Console.ReadLine() ?? "").Trim();
+            Console.Write("Enter a number, or n/N to exit: ");
+            string input = (Console.ReadLine() ?? "").Trim();
 
-            if (girdi.Equals("n", StringComparison.OrdinalIgnoreCase))
+            if (input.Equals("n", StringComparison.OrdinalIgnoreCase))
             {
-                return GirdiTuru.Cikis;
+                return InputType.Exit;
             }
 
-            if (long.TryParse(girdi, out sayi))
+            if (long.TryParse(input, out number))
             {
-                return GirdiTuru.Sayi;
+                return InputType.Number;
             }
 
-            return GirdiTuru.Gecersiz;
+            return InputType.Invalid;
         }
     }
 
-    // Sayının tek mi çift mi olduğunu belirleyen sınıf
-    class TekCiftKontrolcu
+    // Class that determines whether a number is odd or even
+    class OddEvenChecker
     {
-        public bool CiftMi(long sayi)
+        public bool IsEven(long number)
         {
-            return sayi % 2 == 0;
+            return number % 2 == 0;
         }
 
-        public string SonucMetni(long sayi)
+        public string ResultText(long number)
         {
-            return CiftMi(sayi)
-                ? $"{sayi} sayısı çift bir sayıdır."
-                : $"{sayi} sayısı tek bir sayıdır.";
+            return IsEven(number)
+                ? $"{number} is an even number."
+                : $"{number} is an odd number.";
         }
     }
 
-    // Programın akışını yöneten sınıf
-    class Uygulama
+    // Class that manages the program flow
+    class Application
     {
-        private readonly GirdiOkuyucu _okuyucu = new GirdiOkuyucu();
-        private readonly TekCiftKontrolcu _kontrolcu = new TekCiftKontrolcu();
+        private readonly InputReader _reader = new InputReader();
+        private readonly OddEvenChecker _checker = new OddEvenChecker();
 
-        public void Calistir()
+        public void Run()
         {
-            bool devam = true;
+            bool keepRunning = true;
 
-            while (devam)
+            while (keepRunning)
             {
-                GirdiTuru tur = _okuyucu.Oku(out long sayi);
+                InputType type = _reader.Read(out long number);
 
-                switch (tur)
+                switch (type)
                 {
-                    case GirdiTuru.Cikis:
-                        Console.WriteLine("Program sonlandırıldı.");
-                        devam = false;
+                    case InputType.Exit:
+                        Console.WriteLine("Program terminated.");
+                        keepRunning = false;
                         break;
 
-                    case GirdiTuru.Sayi:
-                        Console.WriteLine(_kontrolcu.SonucMetni(sayi));
+                    case InputType.Number:
+                        Console.WriteLine(_checker.ResultText(number));
                         break;
 
                     default:
-                        Console.WriteLine("Geçersiz, sayı ya da n,N girin.");
+                        Console.WriteLine("Invalid input, enter a number or n/N.");
                         break;
                 }
 
@@ -89,8 +89,8 @@ namespace TekCiftUygulamasi
     {
         static void Main(string[] args)
         {
-            Uygulama uygulama = new Uygulama();
-            uygulama.Calistir();
+            Application application = new Application();
+            application.Run();
         }
     }
 }
