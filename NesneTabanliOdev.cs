@@ -2,7 +2,6 @@ using System;
 
 namespace OddEvenApp
 {
-    // Specifies the type of the user's input
     enum InputType
     {
         Exit,
@@ -10,7 +9,6 @@ namespace OddEvenApp
         Invalid
     }
 
-    // Class that reads the input and determines its type
     class InputReader
     {
         public InputType Read(out long number)
@@ -34,7 +32,6 @@ namespace OddEvenApp
         }
     }
 
-    // Class that determines whether a number is odd or even
     class OddEvenChecker
     {
         public bool IsEven(long number)
@@ -50,7 +47,6 @@ namespace OddEvenApp
         }
     }
 
-    // Class that manages the program flow
     class Application
     {
         private readonly InputReader _reader = new InputReader();
