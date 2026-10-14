@@ -17,7 +17,7 @@ namespace TekCiftUygulamasi
         {
             sayi = 0;
 
-            Console.Write("Bir sayı girin (çıkmak için n/N): ");
+            Console.Write("Bir sayı girin, çıkmak için n/N: ");
             string girdi = (Console.ReadLine() ?? "").Trim();
 
             if (girdi.Equals("n", StringComparison.OrdinalIgnoreCase))
@@ -45,8 +45,8 @@ namespace TekCiftUygulamasi
         public string SonucMetni(long sayi)
         {
             return CiftMi(sayi)
-                ? $"{sayi} sayısı ÇİFT bir sayıdır."
-                : $"{sayi} sayısı TEK bir sayıdır.";
+                ? $"{sayi} sayısı çift bir sayıdır."
+                : $"{sayi} sayısı Tek bir sayıdır.";
         }
     }
 
@@ -67,7 +67,7 @@ namespace TekCiftUygulamasi
                 switch (tur)
                 {
                     case GirdiTuru.Cikis:
-                        Console.WriteLine("Program sonlandırıldı. Görüşmek üzere!");
+                        Console.WriteLine("Program sonlandırıldı.");
                         devam = false;
                         break;
 
@@ -76,7 +76,7 @@ namespace TekCiftUygulamasi
                         break;
 
                     default:
-                        Console.WriteLine("Geçersiz giriş! Lütfen sayı ya da n/N girin.");
+                        Console.WriteLine("Geçersiz, sayı ya da n,N girin.");
                         break;
                 }
 
