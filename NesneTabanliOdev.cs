@@ -46,7 +46,7 @@ namespace TekCiftUygulamasi
         {
             return CiftMi(sayi)
                 ? $"{sayi} sayısı çift bir sayıdır."
-                : $"{sayi} sayısı Tek bir sayıdır.";
+                : $"{sayi} sayısı tek bir sayıdır.";
         }
     }
 
